@@ -7,7 +7,6 @@ import configureStore from './configureStore';
 
 function setup():React.Component {
   class Root extends Component {
-
     constructor() {
       super();
       this.state = {

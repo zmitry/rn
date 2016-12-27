@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 import { Container, Header, Input, InputGroup, Content, Text, Button, Icon, Spinner } from 'native-base';
 // import SpinnerNB from '../loaders/Spinner.android';
-import { openDrawer } from '../../actions/drawer';
 import styles from './styles';
 import LoginForm from '../form/form';
 

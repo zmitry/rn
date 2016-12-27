@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import { Image } from 'react-native';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
-import { Container, Content, InputGroup, Input, Button, Icon, View } from 'native-base';
-
+import { Container, Content, List, ListItem, InputGroup, Input, Icon, Text, Picker, Button } from 'native-base';
+import { View } from 'react-native';
 import { setUser } from '../../actions/user';
 import styles from './styles';
-
+const Item = Picker.Item;
 const {
   replaceAt,
 } = actions;
@@ -15,57 +15,47 @@ const {
 const background = require('../../../images/shadow.png');
 
 class Login extends Component {
-
-  static propTypes = {
-    setUser: React.PropTypes.func,
-    replaceAt: React.PropTypes.func,
-    navigation: React.PropTypes.shape({
-      key: React.PropTypes.string,
-    }),
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-    };
-  }
-
-  setUser(name) {
-    this.props.setUser(name);
-  }
-
-  replaceRoute(route) {
-    this.setUser(this.state.name);
-    this.props.replaceAt('login', { key: route }, this.props.navigation.key);
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedItem: undefined,
+            selected1: 'key0',
+            results: {
+                items: [],
+            },
+        };
+    }
+    onValueChange(value: string) {
+        this.setState({
+            selected1: value,
+        });
+    }
 
   render() {
     return (
-      <Container>
-        <View style={styles.container}>
-          <Content>
-            <Image source={background} style={styles.shadow}>
-              <View style={styles.bg}>
-                <InputGroup style={styles.input}>
-                  <Icon name="ios-person" />
-                  <Input placeholder="EMAIL" onChangeText={name => this.setState({ name })} />
-                </InputGroup>
-                <InputGroup style={styles.input}>
-                  <Icon name="ios-unlock-outline" />
-                  <Input
-                    placeholder="PASSWORD"
-                    secureTextEntry
-                  />
-                </InputGroup>
-                <Button style={styles.btn} onPress={() => this.replaceRoute('home')}>
-                  Login
+        <Container style={styles.content}>
+            <Content>
+                <View style={{width:400,marginTop:200}}>
+                <List >
+                    <ListItem>
+                        <InputGroup>
+                            <Icon name="ios-person" style={{ color: '#0A69FE' }} />
+                            <Input placeholder="EMAIL" />
+                        </InputGroup>
+                    </ListItem>
+                    <ListItem>
+                        <InputGroup>
+                            <Icon name="ios-unlock" style={{ color: '#0A69FE' }} />
+                            <Input placeholder="PASSWORD" secureTextEntry />
+                        </InputGroup>
+                    </ListItem>
+                </List>
+                <Button style={{ alignSelf: 'center', marginTop: 20, marginBottom: 20 }}>
+                    Sign Up
                 </Button>
-              </View>
-            </Image>
-          </Content>
-        </View>
-      </Container>
+                </View>
+            </Content>
+        </Container>
     );
   }
 }

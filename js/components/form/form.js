@@ -28,8 +28,8 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    const { error, handleSubmit, pristine, reset, submitting } = this.props;
-    return (
+      const {error, handleSubmit, pristine, reset, submitting} = this.props;
+      return (
       <View>
         <Field
           name="email"
